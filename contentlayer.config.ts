@@ -67,7 +67,7 @@ async function createTagCount(allBlogs) {
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = slug(tag)
+        const formattedTag = tag // `slug(tag)` を使わずそのままのタグを使用
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1
         } else {
@@ -79,7 +79,6 @@ async function createTagCount(allBlogs) {
   const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), { parser: 'json' })
   writeFileSync('./app/tag-data.json', formatted)
 }
-
 function createSearchIndex(allBlogs) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
