@@ -1,3 +1,4 @@
+// app/layout.tsx
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
@@ -94,8 +95,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-      <body 
-        className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white"
+      <body
+        className="
+          pl-[calc(100vw-100%)]
+          text-black antialiased
+          bg-[linear-gradient(to_bottom,rgba(224,247,250,0.8)_0%,#f7fafc_50%,rgba(224,247,250,0.8)_100%)]
+          bg-[length:100%_200vh]
+          bg-repeat-y
+          dark:text-white
+          dark:bg-[linear-gradient(to_bottom,var(--color-gray-900)_0%,var(--color-gray-950)_50%,var(--color-gray-900)_100%)]
+          dark:bg-[length:100%_200vh]
+          dark:bg-repeat-y
+        "
         suppressHydrationWarning
       >
         <ThemeProviders>
