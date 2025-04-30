@@ -56,7 +56,7 @@ export default function Home({ posts }) {
                       <div className="text-base leading-6 font-medium">
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="text-primary-500 hover:text-primary-800 dark:hover:text-primary-400"
                           aria-label={`続きを読む: "${title}"`}
                         >
                           続きを読む &rarr;
@@ -74,7 +74,7 @@ export default function Home({ posts }) {
         <div className="flex justify-end text-base leading-6 font-medium">
           <Link
             href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-primary-500 hover:text-primary-800 dark:hover:text-primary-400"
             aria-label="すべての記事"
           >
             すべての記事 &rarr;
