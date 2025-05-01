@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from 'react'
 
 // スクロール状態を表す型
-export type ScrollState = "initial" | "condensed" | "hidden"
+export type ScrollState = 'initial' | 'condensed' | 'hidden'
 
 /**
  * スクロール位置に基づいて状態を管理するカスタムフック
@@ -24,9 +24,9 @@ export function useScrollState(
   threshold2: number = 350,
   hysteresis: number = 10
 ): ScrollState {
-  const [state, setState] = useState<ScrollState>("initial")
-  const prevState = useRef<ScrollState>("initial")
-  const lastScrollY = useRef<number>(typeof window !== "undefined" ? window.scrollY : 0)
+  const [state, setState] = useState<ScrollState>('initial')
+  const prevState = useRef<ScrollState>('initial')
+  const lastScrollY = useRef<number>(typeof window !== 'undefined' ? window.scrollY : 0)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,29 +34,20 @@ export function useScrollState(
       let nextState = prevState.current
 
       // initial → condensed
-      if (prevState.current === "initial" && scrollY > threshold1) {
-        nextState = "condensed"
+      if (prevState.current === 'initial' && scrollY > threshold1) {
+        nextState = 'condensed'
       }
       // condensed → initial
-      else if (
-        prevState.current === "condensed" &&
-        scrollY < threshold1 - hysteresis
-      ) {
-        nextState = "initial"
+      else if (prevState.current === 'condensed' && scrollY < threshold1 - hysteresis) {
+        nextState = 'initial'
       }
       // condensed → hidden
-      else if (
-        prevState.current === "condensed" &&
-        scrollY > threshold2
-      ) {
-        nextState = "hidden"
+      else if (prevState.current === 'condensed' && scrollY > threshold2) {
+        nextState = 'hidden'
       }
       // hidden → condensed
-      else if (
-        prevState.current === "hidden" &&
-        scrollY < threshold2 - hysteresis
-      ) {
-        nextState = "condensed"
+      else if (prevState.current === 'hidden' && scrollY < threshold2 - hysteresis) {
+        nextState = 'condensed'
       }
 
       if (nextState !== prevState.current) {
@@ -69,8 +60,8 @@ export function useScrollState(
 
     // 初回マウント時の状態セット
     handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [threshold1, threshold2, hysteresis])
 
   return state

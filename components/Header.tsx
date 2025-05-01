@@ -17,11 +17,9 @@ export default function Header() {
     <header className="flex items-center justify-between py-4">
       {/* 左側：ロゴ＋タイトル */}
       <Link href="/" aria-label={siteMetadata.headerTitle} className="flex items-center">
-        <Logo className="w-8 h-8" />
+        <Logo className="h-8 w-8" />
         {typeof siteMetadata.headerTitle === 'string' && (
-          <span className="ml-3 text-2xl font-semibold">
-            {siteMetadata.headerTitle}
-          </span>
+          <span className="ml-3 text-2xl font-semibold">{siteMetadata.headerTitle}</span>
         )}
       </Link>
 
@@ -33,7 +31,7 @@ export default function Header() {
             <Link
               key={link.title}
               href={link.href}
-              className="text-base font-medium text-gray-900 dark:text-gray-100 hover:text-primary-500 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-base font-medium text-gray-900 dark:text-gray-100"
             >
               {link.title}
             </Link>
@@ -43,5 +41,5 @@ export default function Header() {
         <MobileNav />
       </nav>
     </header>
-)
+  )
 }

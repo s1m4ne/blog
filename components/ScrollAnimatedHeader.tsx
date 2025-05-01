@@ -1,5 +1,5 @@
 // components/ScrollAnimatedHeader.tsx
-"use client"
+'use client'
 
 import { useEffect, useState, useRef } from 'react'
 import Header from './Header'
@@ -25,10 +25,10 @@ export default function ScrollAnimatedHeader() {
     const s2 = sentinel2.current!
 
     // 閾値1：20px を超えたら condensed モード
-    const obs1 = new IntersectionObserver(
-      ([entry]) => setNotTop(!entry.isIntersecting),
-      { root: null, threshold: 0 }
-    )
+    const obs1 = new IntersectionObserver(([entry]) => setNotTop(!entry.isIntersecting), {
+      root: null,
+      threshold: 0,
+    })
     // 閾値2：350px を超え、かつ下方向スクロール時に非表示
     const obs2 = new IntersectionObserver(
       ([entry]) => {

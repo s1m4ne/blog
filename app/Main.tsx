@@ -80,6 +80,7 @@ export default function Home({ posts }) {
             すべての記事 &rarr;
           </Link>
         </div>
-      )}    </>
+      )}{' '}
+    </>
   )
 }
