@@ -74,9 +74,7 @@ async function generateRSS(config, allBlogs, page = 'feed.xml') {
 
   // — タグごとフィード
   for (const tag of Object.keys(tagData)) {
-    const postsByTag = sortedPosts.filter((post) =>
-      post.tags.map((t) => slug(t)).includes(tag)
-    )
+    const postsByTag = sortedPosts.filter((post) => post.tags.map((t) => slug(t)).includes(tag))
     const tagFeed = generateRss(config, postsByTag, `tags/${tag}/${page}`)
     const rssDir = path.join(outputFolder, 'tags', tag)
     mkdirSync(rssDir, { recursive: true })
