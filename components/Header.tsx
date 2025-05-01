@@ -16,7 +16,7 @@ export default function Header() {
         )}
       </Link>
       <nav className="flex items-center space-x-4">
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden space-x-4 md:flex">
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
@@ -34,5 +34,5 @@ export default function Header() {
         <MobileNav />
       </nav>
     </header>
-)
+  )
 }

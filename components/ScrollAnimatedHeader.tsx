@@ -13,10 +13,10 @@ export default function ScrollAnimatedHeader() {
   useEffect(() => {
     const s1 = sentinel1.current!
     const s2 = sentinel2.current!
-    const obs1 = new IntersectionObserver(
-      ([entry]) => setNotTop(!entry.isIntersecting),
-      { root: null, threshold: 0 }
-    )
+    const obs1 = new IntersectionObserver(([entry]) => setNotTop(!entry.isIntersecting), {
+      root: null,
+      threshold: 0,
+    })
     const obs2 = new IntersectionObserver(
       ([entry]) => {
         const y = entry.boundingClientRect.y
