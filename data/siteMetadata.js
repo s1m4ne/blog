@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 's1n4me blog',
+  title: 's1n4me.dev',
   author: 's1m4ne',
-  headerTitle: 's1n4me blog',
+  headerTitle: 's1n4me.dev',
   description: 'A place to track my daily learning and share what I’ve learned.',
   language: 'ja',
   theme: 'light', // system, dark or light
