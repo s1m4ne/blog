@@ -1,5 +1,10 @@
 {
-  "LLM": 1,
+  "ブログ開発": 2,
+  "ドメイン": 2,
+  "Cloudflare": 1,
+  "GitHub": 1,
+  "LLM": 2,
+  "GPUサーバ": 1,
   "DeepSeek:R1": 1,
   "LLMサーバ": 1,
   "feature": 2,

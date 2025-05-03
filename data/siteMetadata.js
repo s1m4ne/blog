@@ -3,7 +3,8 @@ const siteMetadata = {
   title: 's1n4me.dev',
   author: 's1m4ne',
   headerTitle: 's1n4me.dev',
-  description: '普段から学習した内容は Markdown エディタにノートとしてまとめているので、ここでは公開できそうなものを掲載していきます。あくまで個人の学習記録として公開しているので、クオリティにはこだわりすぎず緩くやっていこうと思っています。',
+  description:
+    '普段から学習した内容は Markdown エディタにノートとしてまとめているので、ここでは公開できそうなものを掲載していきます。あくまで個人の学習記録として公開しているので、クオリティにはこだわりすぎず緩くやっていこうと思っています。',
   language: 'ja',
   theme: 'light', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
