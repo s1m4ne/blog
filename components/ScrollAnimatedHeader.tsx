@@ -13,10 +13,10 @@ export default function ScrollAnimatedHeader() {
   useEffect(() => {
     const s1 = sentinel1.current!
     const s2 = sentinel2.current!
-    const obs1 = new IntersectionObserver(([entry]) => setNotTop(!entry.isIntersecting), {
-      root: null,
-      threshold: 0,
-    })
+    const obs1 = new IntersectionObserver(
+      ([entry]) => setNotTop(!entry.isIntersecting),
+      { root: null, threshold: 0 }
+    )
     const obs2 = new IntersectionObserver(
       ([entry]) => {
         const y = entry.boundingClientRect.y
@@ -42,7 +42,9 @@ export default function ScrollAnimatedHeader() {
   } else {
     cls +=
       ' w-full px-4' +
-      ' md:w-[48rem] md:px-6' +
+      // 中サイズ（>= md < xl）のときは本文コンテナ幅に合わせる
+      ' md:container md:px-6' +
+      // 大サイズ（>= xl）は従来どおり固定幅
       ' xl:w-[700px] xl:px-6' +
       ' rounded-full border-2 border-gray-300 dark:border-gray-700 bg-white/80 backdrop-blur dark:bg-gray-950 shadow-md'
   }
