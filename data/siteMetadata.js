@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 's1n4me.dev',
+  title: 's1m4ne.dev',
   author: 's1m4ne',
-  headerTitle: 's1n4me.dev',
+  headerTitle: 's1m4ne.dev',
   description:
     '普段から学習した内容は Markdown エディタにノートとしてまとめているので、ここでは公開できそうなものを掲載していきます。あくまで個人の学習記録として公開しているので、クオリティにはこだわりすぎず緩くやっていこうと思っています。',
   language: 'ja',
