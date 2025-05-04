@@ -10,14 +10,14 @@ export default function Home({ posts }) {
     <>
       <div>
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             {/* 以前のスタイルから変更されたタイトルスタイル */}
             <div className="pt-3">
               <h2 className="text-4xl font-bold">Latest</h2>
             </div>
             <Link
               href="/blog"
-              className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
             >
               View all posts →
             </Link>
@@ -26,17 +26,17 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p>
         </div>
-        
+
         <div className="space-y-4">
           {!posts.length && <p className="text-gray-500 dark:text-gray-400">No posts found.</p>}
-          
+
           {posts.slice(0, MAX_DISPLAY).map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}
         </div>
-        
+
         {posts.length > MAX_DISPLAY && (
-          <div className="flex justify-end text-base leading-6 font-medium pt-4">
+          <div className="flex justify-end pt-4 text-base leading-6 font-medium">
             <Link
               href="/blog"
               className="text-primary-500 hover:text-primary-800 dark:hover:text-primary-400"

@@ -9,10 +9,10 @@ export default function Projects() {
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-            Projects
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">My coding portfolio.</p>
+          <div className="mb-4 pt-3">
+            <h2 className="text-4xl font-bold">Projects</h2>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">My coding portfolio.</p>
+          </div>
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">
