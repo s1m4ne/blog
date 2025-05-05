@@ -9,8 +9,8 @@ import tagData from 'app/tag-data.json'
 export default function TagsSidebar() {
   const pathname = usePathname()
   // 修正：新しい tag-data.json 構造に対応
-  const tagInfo = tagData as { 
-    tagCount: Record<string, number>,
+  const tagInfo = tagData as {
+    tagCount: Record<string, number>
     originalTagMapping: Record<string, string>
   }
   const tagCounts = tagInfo.tagCount
@@ -23,9 +23,9 @@ export default function TagsSidebar() {
   const currentTagSlug = encodedTagSlug ? decodeURIComponent(encodedTagSlug) : ''
 
   // デバッグ用コンソール出力
-  console.log('Current path:', pathname);
-  console.log('Encoded tag slug:', encodedTagSlug);
-  console.log('Decoded tag slug:', currentTagSlug);
+  console.log('Current path:', pathname)
+  console.log('Encoded tag slug:', encodedTagSlug)
+  console.log('Decoded tag slug:', currentTagSlug)
 
   return (
     <div className="hidden sm:mt-0 sm:block sm:w-1/4">
@@ -54,18 +54,18 @@ export default function TagsSidebar() {
           {sortedTags.map((t) => {
             // タグのスラグを取得
             const tagSlug = slug(t)
-            
+
             // デバッグ用コンソール出力
-            console.log(`Tag: ${t}, Slug: ${tagSlug}, Match: ${currentTagSlug === tagSlug}`);
-            
+            console.log(`Tag: ${t}, Slug: ${tagSlug}, Match: ${currentTagSlug === tagSlug}`)
+
             // 現在のパスのスラグと一致するか確認
             // 通常の比較とURLエンコード後の比較の両方を試す
-            const isCurrentTag = 
-              currentTagSlug === tagSlug || 
+            const isCurrentTag =
+              currentTagSlug === tagSlug ||
               encodedTagSlug === tagSlug ||
               currentTagSlug === t ||
-              pathname.includes(`/tags/${tagSlug}`);
-            
+              pathname.includes(`/tags/${tagSlug}`)
+
             return (
               <Tag
                 key={t}
@@ -74,7 +74,7 @@ export default function TagsSidebar() {
                 size="md"
                 className={`m-1 ${
                   isCurrentTag
-                    ? 'bg-gray-200 text-gray-800 dark:bg-primary-900 dark:text-primary-200 border-gray-300 dark:border-primary-700 border scale-110 font-bold'
+                    ? 'dark:bg-primary-900 dark:text-primary-200 dark:border-primary-700 scale-110 border border-gray-300 bg-gray-200 font-bold text-gray-800'
                     : ''
                 }`}
               />
@@ -85,7 +85,7 @@ export default function TagsSidebar() {
         <div className="mt-6 flex justify-end">
           <Link
             href="/tags"
-            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 flex items-center"
+            className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
           >
             View all tags →
           </Link>

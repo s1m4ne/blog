@@ -66,7 +66,7 @@ const computedFields: ComputedFields = {
 async function createTagCount(allBlogs) {
   const tagCount: Record<string, number> = {}
   const originalTagMapping: Record<string, string> = {}
-  
+
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
@@ -80,13 +80,13 @@ async function createTagCount(allBlogs) {
       })
     }
   })
-  
+
   // タグデータとオリジナルタグマッピングの両方を保存
   const tagData = {
     tagCount,
-    originalTagMapping
+    originalTagMapping,
   }
-  
+
   const formatted = await prettier.format(JSON.stringify(tagData, null, 2), { parser: 'json' })
   writeFileSync('./app/tag-data.json', formatted)
 }

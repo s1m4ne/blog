@@ -73,8 +73,8 @@ export default function BlogPostsList({
       <div className="mb-4">
         <h2 className="text-4xl font-bold">Blog</h2>
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          Page {pagination?.currentPage || 1} - Showing {displayPosts.length} of{' '}
-          {posts.length} posts
+          Page {pagination?.currentPage || 1} - Showing {displayPosts.length} of {posts.length}{' '}
+          posts
         </p>
       </div>
 

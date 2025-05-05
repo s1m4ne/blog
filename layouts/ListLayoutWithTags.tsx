@@ -33,10 +33,10 @@ export default function ListLayoutWithTags({
           </h1>
         </div>
         <div className="flex flex-col sm:flex-row sm:space-x-8">
-          <BlogPostsList 
-            posts={posts} 
-            initialDisplayPosts={initialDisplayPosts} 
-            pagination={pagination} 
+          <BlogPostsList
+            posts={posts}
+            initialDisplayPosts={initialDisplayPosts}
+            pagination={pagination}
           />
           <TagsSidebar />
         </div>

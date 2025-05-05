@@ -31,9 +31,13 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   return (
     <SectionContainer>
       <ScrollTopAndComment />
-      <article className="pt-6 md:pt-8"> {/* 記事全体の上部に余白を追加 */}
+      <article className="pt-6 md:pt-8">
+        {' '}
+        {/* 記事全体の上部に余白を追加 */}
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-8 xl:pb-6"> {/* ヘッダーの上部にも余白を追加 */}
+          <header className="pt-8 xl:pb-6">
+            {' '}
+            {/* ヘッダーの上部にも余白を追加 */}
             <div className="space-y-1 text-center">
               <dl className="space-y-10">
                 <div>
@@ -100,13 +104,13 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                     </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
-                        <Tag 
-                          key={tag} 
-                          text={tag} 
-                          variant="pill" 
-                          size="md" 
+                        <Tag
+                          key={tag}
+                          text={tag}
+                          variant="pill"
+                          size="md"
                           showCount={true}
-                          className="m-1" 
+                          className="m-1"
                         />
                       ))}
                     </div>

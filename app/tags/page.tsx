@@ -7,13 +7,13 @@ export const metadata = genPageMetadata({ title: 'Tags', description: 'Things I 
 
 export default async function Page() {
   // tag-data.json の新しい構造に対応
-  const tagInfo = tagData as { 
-    tagCount: Record<string, number>,
+  const tagInfo = tagData as {
+    tagCount: Record<string, number>
     originalTagMapping: Record<string, string>
   }
   const tagCounts = tagInfo.tagCount || {}
   const originalTagMapping = tagInfo.originalTagMapping || {}
-  
+
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
