@@ -10,11 +10,11 @@ const POSTS_PER_PAGE = 5
 export const generateStaticParams = async () => {
   // 新しいtag-data.json構造に対応
   const tagInfo = tagData as {
-    tagCount: Record<string, number>,
+    tagCount: Record<string, number>
     originalTagMapping: Record<string, string>
   }
   const tagCounts = tagInfo.tagCount
-  
+
   return Object.keys(tagCounts).flatMap((tag) => {
     const postCount = tagCounts[tag]
     const totalPages = Math.max(1, Math.ceil(postCount / POSTS_PER_PAGE))
@@ -28,18 +28,19 @@ export const generateStaticParams = async () => {
 export default async function TagPage(props: { params: Promise<{ tag: string; page: string }> }) {
   const params = await props.params
   const tag = decodeURI(params.tag)
-  
+
   // 新しいtag-data.json構造に対応してタイトルを取得
   const tagInfo = tagData as {
-    tagCount: Record<string, number>,
+    tagCount: Record<string, number>
     originalTagMapping: Record<string, string>
   }
   const originalTagMapping = tagInfo.originalTagMapping || {}
-  
+
   // 元のタグ名を取得（存在する場合）、なければタグスラグから生成
-  const originalTag = originalTagMapping[tag] || (tag[0].toUpperCase() + tag.split(' ').join('-').slice(1))
+  const originalTag =
+    originalTagMapping[tag] || tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const title = originalTag
-  
+
   const pageNumber = parseInt(params.page)
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
