@@ -1,6 +1,9 @@
+'use client'
+
 import Link from '@/components/Link'
 import { formatDate } from 'pliny/utils/formatDate'
 import siteMetadata from '@/data/siteMetadata'
+import Tag from '@/components/Tag'
 
 export default function BlogCard({ post }) {
   const { path, date, title, summary, tags } = post
@@ -24,12 +27,12 @@ export default function BlogCard({ post }) {
               <div className="flex flex-wrap gap-2">
                 {tags &&
                   tags.map((tag) => (
-                    <div
+                    <Tag
                       key={tag}
-                      className="rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                    >
-                      {tag}
-                    </div>
+                      text={tag}
+                      variant="pill"
+                      size="sm"
+                    />
                   ))}
               </div>
             </div>
