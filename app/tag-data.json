@@ -1,8 +1,8 @@
 {
+  "llm": 1,
+  "gpuサーバ": 1,
   "ブログ開発": 3,
   "ドメイン": 3,
   "cloudflare": 2,
-  "github": 2,
-  "llm": 1,
-  "gpuサーバ": 1
+  "github": 2
 }
