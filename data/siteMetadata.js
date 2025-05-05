@@ -6,8 +6,8 @@ const siteMetadata = {
   description:
     '普段から学習した内容は Markdown エディタにノートとしてまとめているので、ここでは公開できそうなものを掲載していきます。あくまで個人の学習記録として公開しているので、クオリティにはこだわりすぎず緩くやっていこうと思っています。',
   language: 'ja',
-  theme: 'light', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
+  theme: 'system', // system, dark or light
+  siteUrl: 'https://s1m4ne.dev',
   siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
