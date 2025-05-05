@@ -10,29 +10,24 @@ import { Metadata } from 'next'
 const POSTS_PER_PAGE = 5
 
 export async function generateMetadata(props: {
-  params: Promise<{ tag: string }>
+  params: Promise<{ tag: string; page: string }>
 }): Promise<Metadata> {
   const params = await props.params
   const tag = decodeURI(params.tag)
-
+  
   // タグデータから元のタグ名を取得（存在する場合）
   const tagInfo = tagData as {
     tagCount: Record<string, number>
     originalTagMapping: Record<string, string>
   }
-
-  // tag-data.json の新しい構造に対応
   const originalTagMapping = tagInfo.originalTagMapping || {}
   const originalTag = originalTagMapping[tag] || tag
-
+  
   return genPageMetadata({
-    title: originalTag,
-    description: `${siteMetadata.title} ${originalTag} tagged content`,
+    title: `${originalTag} posts - Page ${params.page}`,
+    description: `${siteMetadata.title} ${originalTag} tagged content - Page ${params.page}`,
     alternates: {
       canonical: './',
-      types: {
-        'application/rss+xml': `${siteMetadata.siteUrl}/tags/${tag}/feed.xml`,
-      },
     },
   })
 }
@@ -43,24 +38,25 @@ export const generateStaticParams = async () => {
     tagCount: Record<string, number>
     originalTagMapping: Record<string, string>
   }
-  const tagCounts = tagInfo.tagCount || {}
-  const tagKeys = Object.keys(tagCounts)
-
-  // 修正：タグごとに両方のバージョン（エンコードされたものとそのまま）を生成
-  return tagKeys.flatMap((tag) => [
-    {
-      tag: tag, // エンコードなしのバージョン
-    },
-    {
-      tag: encodeURI(tag), // エンコードされたバージョン
-    },
-  ])
+  const tagCounts = tagInfo.tagCount
+  
+  return Object.keys(tagCounts).flatMap((tag) => {
+    const postCount = tagCounts[tag]
+    const totalPages = Math.max(1, Math.ceil(postCount / POSTS_PER_PAGE))
+    return Array.from({ length: totalPages }, (_, i) => {
+      return {
+        tag,
+        page: (i + 1).toString(),
+      }
+    })
+  })
 }
 
-export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
+export default async function TagPagination(props: { params: Promise<{ tag: string; page: string }> }) {
   const params = await props.params
   const tag = decodeURI(params.tag)
-
+  const page = parseInt(params.page as string)
+  
   // タグデータから元のタグ名を取得（存在する場合）
   const tagInfo = tagData as {
     tagCount: Record<string, number>
@@ -68,17 +64,20 @@ export default async function TagPage(props: { params: Promise<{ tag: string }> 
   }
   const originalTagMapping = tagInfo.originalTagMapping || {}
   const originalTag = originalTagMapping[tag] || tag
-
+  
   // タイトルに元のタグ名を使用
   const title = originalTag
-
+  
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )
+  const pageNumber = parseInt(params.page as string)
+  const startIndex = (pageNumber - 1) * POSTS_PER_PAGE
+  const endIndex = startIndex + POSTS_PER_PAGE
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
-  const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE)
+  const initialDisplayPosts = filteredPosts.slice(startIndex, endIndex)
   const pagination = {
-    currentPage: 1,
+    currentPage: pageNumber,
     totalPages: totalPages,
   }
 
