@@ -1,18 +1,18 @@
 {
   "tagCount": {
-    "llm": 1,
-    "gpuサーバ": 1,
     "ブログ開発": 3,
     "ドメイン": 3,
     "cloudflare": 2,
-    "github": 2
+    "github": 2,
+    "llm": 1,
+    "gpuサーバ": 1
   },
   "originalTagMapping": {
-    "llm": "LLM",
-    "gpuサーバ": "GPUサーバ",
     "ブログ開発": "ブログ開発",
     "ドメイン": "ドメイン",
     "cloudflare": "Cloudflare",
-    "github": "GitHub"
+    "github": "GitHub",
+    "llm": "LLM",
+    "gpuサーバ": "GPUサーバ"
   }
 }
