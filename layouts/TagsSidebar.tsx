@@ -74,7 +74,7 @@ export default function TagsSidebar() {
                 size="md"
                 className={`m-1 ${
                   isCurrentTag
-                    ? 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 border-primary-300 dark:border-primary-700 border scale-110 font-bold'
+                    ? 'bg-gray-200 text-gray-800 dark:bg-primary-900 dark:text-primary-200 border-gray-300 dark:border-primary-700 border scale-110 font-bold'
                     : ''
                 }`}
               />

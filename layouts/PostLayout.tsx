@@ -158,10 +158,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-800 dark:hover:text-primary-400"
-                  aria-label="ブログ一覧に戻る"
+                  className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                  aria-label="Back to all posts"
                 >
-                  &larr; ブログ一覧に戻る
+                  ← Back to posts
                 </Link>
               </div>
             </footer>
