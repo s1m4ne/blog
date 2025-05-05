@@ -1,3 +1,5 @@
+// app/tags/[tag]/page.tsx の全体
+
 import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
@@ -29,9 +31,15 @@ export async function generateMetadata(props: {
 export const generateStaticParams = async () => {
   const tagCounts = tagData as Record<string, number>
   const tagKeys = Object.keys(tagCounts)
-  return tagKeys.map((tag) => ({
-    tag: encodeURI(tag),
-  }))
+  // 修正：タグごとに両方のバージョン（エンコードされたものとそのまま）を生成
+  return tagKeys.flatMap((tag) => [
+    {
+      tag: tag, // エンコードなしのバージョン
+    },
+    {
+      tag: encodeURI(tag), // エンコードされたバージョン
+    }
+  ])
 }
 
 export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
@@ -39,7 +47,7 @@ export default async function TagPage(props: { params: Promise<{ tag: string }> 
   const tag = decodeURI(params.tag)
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const filteredPosts = allCoreContent(
-    sortPosts(allBlogs.filter((post) => post.tags && post.tags.includes(tag)))
+    sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
   const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE)
