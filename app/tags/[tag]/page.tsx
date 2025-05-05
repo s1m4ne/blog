@@ -38,7 +38,7 @@ export const generateStaticParams = async () => {
     },
     {
       tag: encodeURI(tag), // エンコードされたバージョン
-    }
+    },
   ])
 }
 
