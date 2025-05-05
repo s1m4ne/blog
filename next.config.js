@@ -54,9 +54,11 @@ const securityHeaders = [
   },
 ]
 
-const output = process.env.EXPORT ? 'export' : undefined
+// 環境変数に関わらず常に静的出力に設定
+const output = 'export'
 const basePath = process.env.BASE_PATH || undefined
-const unoptimized = process.env.UNOPTIMIZED ? true : undefined
+// 常に画像最適化を無効に設定
+const unoptimized = true
 
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
@@ -67,7 +69,7 @@ module.exports = () => {
     output,
     basePath: '',
     reactStrictMode: true,
-    trailingSlash: false,
+    trailingSlash: true, // GitHub Pages での動的ルーティングのために true に変更
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
