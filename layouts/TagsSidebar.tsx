@@ -1,4 +1,4 @@
-// layouts/TagsSidebar.tsx
+// layouts/TagsSidebar.tsx の修正版
 'use client'
 
 import { usePathname } from 'next/navigation'
@@ -18,6 +18,15 @@ export default function TagsSidebar() {
   const originalTags = tagInfo.originalTagMapping
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
+
+  // 現在のパスからタグスラグを抽出し、デコード
+  const encodedTagSlug = pathname.split('/tags/')[1]?.split('/')[0]
+  const currentTagSlug = encodedTagSlug ? decodeURIComponent(encodedTagSlug) : ''
+
+  // デバッグ用コンソール出力
+  console.log('Current path:', pathname);
+  console.log('Encoded tag slug:', encodedTagSlug);
+  console.log('Decoded tag slug:', currentTagSlug);
 
   return (
     <div className="hidden sm:mt-0 sm:block sm:w-1/4">
@@ -44,7 +53,20 @@ export default function TagsSidebar() {
 
         <div className="mt-2 flex flex-wrap">
           {sortedTags.map((t) => {
-            const isCurrentTag = pathname.includes(`/tags/${slug(t)}`)
+            // タグのスラグを取得
+            const tagSlug = slug(t)
+            
+            // デバッグ用コンソール出力
+            console.log(`Tag: ${t}, Slug: ${tagSlug}, Match: ${currentTagSlug === tagSlug}`);
+            
+            // 現在のパスのスラグと一致するか確認
+            // 通常の比較とURLエンコード後の比較の両方を試す
+            const isCurrentTag = 
+              currentTagSlug === tagSlug || 
+              encodedTagSlug === tagSlug ||
+              currentTagSlug === t ||
+              pathname.includes(`/tags/${tagSlug}`);
+            
             return (
               <Tag
                 key={t}
@@ -53,7 +75,7 @@ export default function TagsSidebar() {
                 size="md"
                 className={`m-1 ${
                   isCurrentTag
-                    ? 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 border-primary-300 dark:border-primary-700 border'
+                    ? 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 border-primary-300 dark:border-primary-700 border scale-110 font-bold'
                     : ''
                 }`}
               />

@@ -32,6 +32,7 @@ export default function BlogCard({ post }) {
                       text={tag}
                       variant="pill"
                       size="sm"
+                      isLink={false} // リンクとして機能しないように設定
                     />
                   ))}
               </div>

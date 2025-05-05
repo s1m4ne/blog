@@ -13,9 +13,17 @@ interface Props {
   size?: 'sm' | 'md' | 'lg'
   showCount?: boolean
   className?: string
+  isLink?: boolean // 追加：リンクとして機能するかどうか
 }
 
-const Tag = ({ text, variant = 'default', size = 'md', showCount = false, className = '' }: Props) => {
+const Tag = ({ 
+  text, 
+  variant = 'default', 
+  size = 'md', 
+  showCount = false, 
+  className = '',
+  isLink = true // デフォルトはリンク
+}: Props) => {
   // タグデータから元のタグ文字列とカウント数を取得
   const tagInfo = tagData as { 
     tagCount: Record<string, number>,
@@ -47,6 +55,20 @@ const Tag = ({ text, variant = 'default', size = 'md', showCount = false, classN
   const handleClick = (e) => {
     e.stopPropagation();
   };
+
+  // リンクではなくスパンとして返す
+  if (!isLink) {
+    return (
+      <span className={`inline-block ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}>
+        {displayTag}
+        {showCount && variant === 'count' && (
+          <span className="absolute -top-2 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-gray-700 dark:bg-gray-600 dark:text-gray-300">
+            {count}
+          </span>
+        )}
+      </span>
+    );
+  }
 
   return (
     <Link
