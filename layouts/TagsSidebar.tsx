@@ -1,4 +1,3 @@
-// layouts/TagsSidebar.tsx の修正版
 'use client'
 
 import { usePathname } from 'next/navigation'
@@ -86,23 +85,9 @@ export default function TagsSidebar() {
         <div className="mt-6 flex justify-end">
           <Link
             href="/tags"
-            className="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center text-sm font-medium"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 flex items-center"
           >
-            View all
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="ml-1 h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
+            View all tags →
           </Link>
         </div>
       </div>
