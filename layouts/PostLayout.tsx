@@ -31,9 +31,9 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   return (
     <SectionContainer>
       <ScrollTopAndComment />
-      <article>
+      <article className="pt-6 md:pt-8"> {/* 記事全体の上部に余白を追加 */}
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
+          <header className="pt-8 xl:pb-6"> {/* ヘッダーの上部にも余白を追加 */}
             <div className="space-y-1 text-center">
               <dl className="space-y-10">
                 <div>
@@ -87,7 +87,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dd>
             </dl>
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
-              <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
+              <div className="prose dark:prose-invert max-w-none pt-12 pb-8">{children}</div>
               {/* 削除: Discuss on Twitter • View on GitHub リンク */}
               {/* 削除: Comments コンポーネント */}
             </div>
