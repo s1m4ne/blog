@@ -61,9 +61,12 @@ const computedFields: ComputedFields = {
 
 /**
  * Count the occurrences of all tags across blog posts and write to json file
+ * 修正: タグの表示用と URL 用の両方のバージョンを保存
  */
 async function createTagCount(allBlogs) {
   const tagCount: Record<string, number> = {}
+  const originalTagMapping: Record<string, string> = {}
+  
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
@@ -72,13 +75,22 @@ async function createTagCount(allBlogs) {
           tagCount[formattedTag] += 1
         } else {
           tagCount[formattedTag] = 1
+          originalTagMapping[formattedTag] = tag // 元のタグ文字列を保存
         }
       })
     }
   })
-  const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), { parser: 'json' })
+  
+  // タグデータとオリジナルタグマッピングの両方を保存
+  const tagData = {
+    tagCount,
+    originalTagMapping
+  }
+  
+  const formatted = await prettier.format(JSON.stringify(tagData, null, 2), { parser: 'json' })
   writeFileSync('./app/tag-data.json', formatted)
 }
+
 function createSearchIndex(allBlogs) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&

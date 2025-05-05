@@ -1,5 +1,3 @@
-// app/tags/[tag]/page.tsx の全体
-
 import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
@@ -16,9 +14,20 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const params = await props.params
   const tag = decodeURI(params.tag)
+  
+  // タグデータから元のタグ名を取得（存在する場合）
+  const tagInfo = tagData as { 
+    tagCount: Record<string, number>,
+    originalTagMapping: Record<string, string>
+  }
+  
+  // tag-data.json の新しい構造に対応
+  const originalTagMapping = tagInfo.originalTagMapping || {}
+  const originalTag = originalTagMapping[tag] || tag
+  
   return genPageMetadata({
-    title: tag,
-    description: `${siteMetadata.title} ${tag} tagged content`,
+    title: originalTag,
+    description: `${siteMetadata.title} ${originalTag} tagged content`,
     alternates: {
       canonical: './',
       types: {
@@ -29,8 +38,14 @@ export async function generateMetadata(props: {
 }
 
 export const generateStaticParams = async () => {
-  const tagCounts = tagData as Record<string, number>
+  // tag-data.json の新しい構造に対応
+  const tagInfo = tagData as { 
+    tagCount: Record<string, number>,
+    originalTagMapping: Record<string, string>
+  }
+  const tagCounts = tagInfo.tagCount || {}
   const tagKeys = Object.keys(tagCounts)
+  
   // 修正：タグごとに両方のバージョン（エンコードされたものとそのまま）を生成
   return tagKeys.flatMap((tag) => [
     {
@@ -38,14 +53,25 @@ export const generateStaticParams = async () => {
     },
     {
       tag: encodeURI(tag), // エンコードされたバージョン
-    },
+    }
   ])
 }
 
 export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
   const params = await props.params
   const tag = decodeURI(params.tag)
-  const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
+  
+  // タグデータから元のタグ名を取得（存在する場合）
+  const tagInfo = tagData as { 
+    tagCount: Record<string, number>,
+    originalTagMapping: Record<string, string>
+  }
+  const originalTagMapping = tagInfo.originalTagMapping || {}
+  const originalTag = originalTagMapping[tag] || tag
+  
+  // タイトルに元のタグ名を使用
+  const title = originalTag
+  
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )

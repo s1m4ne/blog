@@ -71,7 +71,13 @@ export default function ListLayoutWithTags({
   pagination,
 }: ListLayoutProps) {
   const pathname = usePathname()
-  const tagCounts = tagData as Record<string, number>
+  // 修正：新しい tag-data.json 構造に対応
+  const tagInfo = tagData as { 
+    tagCount: Record<string, number>,
+    originalTagMapping: Record<string, string>
+  }
+  const tagCounts = tagInfo.tagCount
+  const originalTags = tagInfo.originalTagMapping
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
@@ -132,6 +138,8 @@ export default function ListLayoutWithTags({
               <div className="mt-2 flex flex-wrap">
                 {sortedTags.map((t) => {
                   const isCurrentTag = pathname.includes(`/tags/${slug(t)}`)
+                  // 表示用には元のタグ文字列を使用
+                  const displayTag = originalTags[t] || t
                   return (
                     <Link
                       key={t}
@@ -141,9 +149,9 @@ export default function ListLayoutWithTags({
                           ? 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 border-primary-300 dark:border-primary-700 border'
                           : 'border border-gray-200 bg-gray-100 text-gray-800 hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
                       }`}
-                      aria-label={`View posts tagged ${t}`}
+                      aria-label={`View posts tagged ${displayTag}`}
                     >
-                      {t}
+                      {displayTag}
                     </Link>
                   )
                 })}
